@@ -24,7 +24,7 @@ def init_views(app):
 
     @app.route("/")
     def home():
-        return render_template("index.html", title="Home")
+        return render_template("index.html", title="Hire Intelligence Staff Portal")
 
     @app.route("/login", methods=("GET", "POST"))
     def login():
