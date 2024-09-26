@@ -1,0 +1,13 @@
+{% extends "base.html" %} {% block title %}
+<title>{{title}}</title>
+{% endblock %} {% block content %}
+
+<h1 class="text-center">{{title}}</h1>
+
+<hr />
+
+<div class="container">
+  <div class="col-md-3 mt-5">{{ render_form(form) }}</div>
+</div>
+
+{% endblock %}

@@ -1,4 +1,4 @@
-from wtforms import StringField, PasswordField, SubmitField, TextAreaField, BooleanField
+from wtforms import StringField, PasswordField, SubmitField, TextAreaField, BooleanField, EmailField
 from flask_wtf import FlaskForm
 from wtforms.validators import InputRequired, Length, ValidationError
 from models import User, SiteEntry
@@ -8,6 +8,7 @@ from models import User, SiteEntry
 class RegisterForm(FlaskForm):
 
     username = StringField("Username :", validators = [InputRequired(message:="username must be entered") ], render_kw={"class":"form-control"})
+    email = EmailField("Email : ", validators=[InputRequired(message="Email is required")], render_kw={"class":"form-control"})
     password = PasswordField("Password : ", validators= [InputRequired(message:="password must be provided")], render_kw={"class":"form-control"})
     submit = SubmitField("Register", render_kw={"class":"btn btn-primary"})
 

@@ -8,6 +8,8 @@ from models import User, SiteEntry
 
 
 
+
+
 def create_app():
     app=Flask(__name__)
     app.config.from_object(Config)
