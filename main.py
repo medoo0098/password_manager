@@ -1,7 +1,7 @@
 from config import Config, db
 from flask import Flask
 from views import init_views
-from models import User, SiteEntry
+from models import User
 
 
 
