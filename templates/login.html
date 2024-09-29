@@ -11,6 +11,15 @@
 
 <hr>
 
-
-
-{% endblock %}
+<div class="container flex-container" >
+    <div>
+      <h2>Hire Intelligence Portal</h2>
+    </div>
+    <div class="col-md-3 mt-5">{{ render_form(form) }}</div>
+    
+  </div>
+  
+  {% endblock %}
+  {% block year %} 
+      {{year}}
+  {% endblock %}
