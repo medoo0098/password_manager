@@ -4,7 +4,7 @@ from flask_login import UserMixin
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
-    Password = db.Column(db.String(512), nullable=False)
+    password = db.Column(db.String(512), nullable=False)
     email = db.Column(db.String(80), unique=True, nullable=False)
     is_admin = db.Column(db.Boolean)
     is_manager = db.Column(db.Boolean)
