@@ -27,7 +27,7 @@ class LoginForm(FlaskForm):
 
     username = StringField("Username", validators=[InputRequired(message="Username must be entered")])
     password = StringField("Password", validators=[InputRequired(message="Password must be provided")])
-    submit = SubmitField("Log in")
+    submit = SubmitField("Log in", render_kw={"class":"btn btn-warning"})
     
 
 
@@ -37,4 +37,4 @@ class LeaveForm(FlaskForm):
     start_time = TimeField("What Time")
     return_date = DateField("Return Time")
     reason = SelectField("Reason", choices=["Personal Day", "Medical"])
-    submit = SubmitField()
+    submit = SubmitField("Submit for approval", render_kw={"class":"btn btn-warning"})

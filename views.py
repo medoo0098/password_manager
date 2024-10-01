@@ -120,6 +120,16 @@ def init_views(app):
 
 
 
+    # router to view note
+
+
+
+    @app.route("/notes", methods=("GET", "POST"))
+    def notes():
+        return render_template("notes.html", title="Notes", year=datetime.now().year)
+
+
+
     # router to view share note
 
 
@@ -146,6 +156,24 @@ def init_views(app):
     @app.route("/leave", methods=("GET", "POST"))
     def leave():
         return render_template("leave.html", title="Anual/Medical Leave", year=datetime.now().year)
+    
+
+    # route to view anual leave
+
+
+    @app.route("/anual_leave", methods=("GET", "POST"))
+    def anual_leave():
+        return render_template("anual-leave.html", title="Anual Leave", year=datetime.now().year)
+    
+
+
+    # route to view medial leave
+
+
+    @app.route("/Medical_leave", methods=("GET", "POST"))
+    def medical_leave():
+        return render_template("medical-leave.html", title="Medical Leave", year=datetime.now().year)
+    
 
 
 

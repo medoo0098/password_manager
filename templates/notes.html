@@ -10,13 +10,12 @@
 <h1 class="text-center">{{title}}</h1>
 
 <div class="container flex-container" >
-    <div>
-      <h2>Hire Intelligence Portal</h2>
-    </div>
-    <div class="col-md-3 mt-5">{{ render_form(form) }}</div>
 
 
-    <a href="{{url_for('leave')}}"><button class="btn btn-warning btn-lg">Leave</button></a>
+    <a href="{{url_for('share_notes')}}"><button class="btn btn-warning btn-lg">Share Notes</button></a>
+
+
+    <a href="{{url_for('secure_notes')}}"><button class="btn btn-warning btn-lg">Secure Notes</button></a>
     
   </div>
 
