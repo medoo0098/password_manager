@@ -17,3 +17,7 @@ footer{
     display: "flex";
     flex-direction: column;
 }
+
+.btn-lg{
+    border: 2px solid black;
+}
