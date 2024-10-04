@@ -120,7 +120,18 @@ def init_views(app):
 
 
 
+    # router to view licences
+
+
+
+    @app.route("/licences", methods=("GET", "POST"))
+    def licences():
+        return render_template("licences.html", title="Licences", year=datetime.now().year)
+
+
+
     # router to view note
+
 
 
 
@@ -177,7 +188,16 @@ def init_views(app):
 
 
 
-# route to view expence
+    # route to view compensation
+
+
+    @app.route("/compensation", methods=("GET", "POST"))
+    def compensation():
+        return render_template("compensation.html", title="Compensations", year=datetime.now().year)
+    
+
+
+    # route to view expence
 
 
     @app.route("/expence", methods=("GET", "POST"))
@@ -185,7 +205,7 @@ def init_views(app):
         return render_template("expence.html", title="Expence Claim", year=datetime.now().year)
     
 
-# route to view overtime
+    # route to view overtime
 
 
     @app.route("/overtime", methods=("GET", "POST"))

@@ -12,7 +12,7 @@ class RegisterForm(FlaskForm):
     password = PasswordField("Password : ", validators= [InputRequired(message:="password must be provided")], render_kw={"class":"form-control"})
     admin = BooleanField("Admin",default="")
     manager = BooleanField("Manager", default="")
-    department = SelectField("Department", choices=["Sales", "Administration", "Technical"])
+    department = SelectField("Department", choices=["Sales", "Administration", "Technical", "General Manager"])
     submit = SubmitField("Register", render_kw={"class":"btn btn-warning"})
 
 
