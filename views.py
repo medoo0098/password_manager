@@ -12,7 +12,7 @@ from flask_login import (
 )
 from datetime import datetime
 from flask_bootstrap import Bootstrap5
-from forms import RegisterForm, LoginForm, LeaveForm
+from forms import RegisterForm, LoginForm, PersonalDay, AddLicence
 
 
 def init_views(app):
@@ -38,7 +38,7 @@ def init_views(app):
 
     @app.route("/", methods=("GET", "POST"))
     def home():
-        form = LeaveForm()
+        form = PersonalDay()
 
         return render_template("index.html", title="Hire Intelligence Staff Portal", year=datetime.now().year, form=form)
 
@@ -126,7 +126,9 @@ def init_views(app):
 
     @app.route("/licences", methods=("GET", "POST"))
     def licences():
-        return render_template("licences.html", title="Licences", year=datetime.now().year)
+        detail_form = AddLicence.ProductDetails()
+        management_form = AddLicence.ProductManagement()
+        return render_template("licences.html", title="Licences", year=datetime.now().year, detail_form=detail_form, management_form=management_form)
 
 
 
@@ -166,6 +168,7 @@ def init_views(app):
 
     @app.route("/leave", methods=("GET", "POST"))
     def leave():
+        
         return render_template("leave.html", title="Anual/Medical Leave", year=datetime.now().year)
     
 
@@ -174,7 +177,9 @@ def init_views(app):
 
     @app.route("/anual_leave", methods=("GET", "POST"))
     def anual_leave():
-        return render_template("anual-leave.html", title="Anual Leave", year=datetime.now().year)
+
+        form = PersonalDay()
+        return render_template("anual-leave.html", title="Anual Leave", year=datetime.now().year, form=form)
     
 
 
