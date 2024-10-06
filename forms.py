@@ -1,4 +1,7 @@
-from wtforms import StringField, PasswordField, SubmitField, TextAreaField, BooleanField, SelectMultipleField, EmailField,SelectField, DateTimeField, DateField, TimeField, URLField, IntegerField, FloatField
+from wtforms import (StringField, PasswordField, SubmitField, TextAreaField, 
+                     BooleanField, SelectMultipleField, EmailField,SelectField, 
+                     DateTimeField, DateField, TimeField, URLField, 
+                     IntegerField, FloatField)
 from flask_wtf import FlaskForm
 from wtforms.validators import InputRequired, Length, ValidationError
 from models import User
@@ -7,12 +10,19 @@ from models import User
 
 class RegisterForm(FlaskForm):
 
-    username = StringField("Username :", validators = [InputRequired(message:="username must be entered") ], render_kw={"class":"form-control"})
-    email = EmailField("Email : ", validators=[InputRequired(message="Email is required")], render_kw={"class":"form-control"})
-    password = PasswordField("Password : ", validators= [InputRequired(message:="password must be provided")], render_kw={"class":"form-control"})
+    username = StringField("Username :", 
+        validators = [InputRequired(message:="username must be entered") ], 
+        render_kw={"class":"form-control"})
+    email = EmailField("Email : ", 
+        validators=[InputRequired(message="Email is required")], 
+        render_kw={"class":"form-control"})
+    password = PasswordField("Password : ", 
+        validators= [InputRequired(message:="password must be provided")], 
+        render_kw={"class":"form-control"})
     admin = BooleanField("Admin",default="")
     manager = BooleanField("Manager", default="")
-    department = SelectField("Department", choices=["Sales", "Administration", "Technical", "General Manager"])
+    department = SelectField("Department", 
+        choices=["Sales", "Administration", "Technical", "General Manager"])
     submit = SubmitField("Register", render_kw={"class":"btn btn-warning"})
 
 
@@ -25,8 +35,10 @@ class RegisterForm(FlaskForm):
 
 class LoginForm(FlaskForm):
 
-    username = StringField("Username", validators=[InputRequired(message="Username must be entered")])
-    password = StringField("Password", validators=[InputRequired(message="Password must be provided")])
+    username = StringField("Username", 
+        validators=[InputRequired(message="Username must be entered")])
+    password = StringField("Password", 
+        validators=[InputRequired(message="Password must be provided")])
     submit = SubmitField("Log in", render_kw={"class":"btn btn-warning"})
     
 
@@ -37,7 +49,8 @@ class PersonalDay(FlaskForm):
     start_time = TimeField("Starting Time")
     return_date = DateField("Return Time")
     return_time = TimeField("Return Time")
-    submit = SubmitField("Submit for approval", render_kw={"class":"btn btn-warning"})
+    submit = SubmitField("Submit for approval", 
+        render_kw={"class":"btn btn-warning"})
 
 
 class AddLicence(FlaskForm):
@@ -59,7 +72,8 @@ class AddLicence(FlaskForm):
         username = StringField("Username / Email: ")
         password = StringField("Password: ")
         purchased_by = StringField("Purchased By (name) :")
-        purchase_method = SelectField(choices=["Direct Debit", "Credit Card", "Paypal", "Cash"])
+        purchase_method = SelectField(choices=["Direct Debit", 
+            "Credit Card", "Paypal", "Cash"])
         purchase_date = DateField("Purchase Date")
         experation_date = DateField("Expiration Date")
         purchase_duration = IntegerField("Duration")

@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request, url_for, redirect, session, flash
+from flask import (Flask, render_template, request, url_for, redirect, 
+    session, flash)
 from models import User
 from config import db
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -40,7 +41,9 @@ def init_views(app):
     def home():
         form = PersonalDay()
 
-        return render_template("index.html", title="Hire Intelligence Staff Portal", year=datetime.now().year, form=form)
+        return render_template("index.html", 
+            title="Hire Intelligence Staff Portal", 
+            year=datetime.now().year, form=form)
 
 
 
@@ -55,7 +58,8 @@ def init_views(app):
             username = form.username.data
             password = form.password.data
 
-        return render_template("login.html", title="Login", year=year, form=form)
+        return render_template("login.html", title="Login", 
+            year=year, form=form)
 
 
 
@@ -70,7 +74,8 @@ def init_views(app):
         if form.validate_on_submit():
             new_user = User(
             username = form.username.data,
-            password = generate_password_hash(f'{form.password.data}', method="pbkdf2:sha256", salt_length=8),
+            password = generate_password_hash(f'{form.password.data}', 
+                method="pbkdf2:sha256", salt_length=8),
             email = form.email.data,
             is_admin = form.admin.data,
             is_manager = form.manager.data,
@@ -86,7 +91,8 @@ def init_views(app):
                 flash(f"Registeration failed: {errors[0][0]}", "danger")
 
 
-        return render_template("register.html", title="Register", year=datetime.now().year, form=form, errors=errors)
+        return render_template("register.html", title="Register", 
+            year=datetime.now().year, form=form, errors=errors)
 
 
 
@@ -96,7 +102,8 @@ def init_views(app):
 
     @app.route("/logout", methods=("GET", "POST"))
     def logout():
-        return render_template("logout.html", title="Logout", year=datetime.now().year)
+        return render_template("logout.html", title="Logout", 
+            year=datetime.now().year)
 
 
 
@@ -106,7 +113,8 @@ def init_views(app):
 
     @app.route("/about", methods=("GET", "POST"))
     def about():
-        return render_template("about.html", title="About", year=datetime.now().year)
+        return render_template("about.html", title="About", 
+            year=datetime.now().year)
 
 
 
@@ -116,7 +124,8 @@ def init_views(app):
 
     @app.route("/accounts", methods=("GET", "POST"))
     def accounts():
-        return render_template("accounts.html", title="Logins", year=datetime.now().year)
+        return render_template("accounts.html", title="Logins", 
+            year=datetime.now().year)
 
 
 
@@ -128,7 +137,9 @@ def init_views(app):
     def licences():
         detail_form = AddLicence.ProductDetails()
         management_form = AddLicence.ProductManagement()
-        return render_template("licences.html", title="Licences", year=datetime.now().year, detail_form=detail_form, management_form=management_form)
+        return render_template("licences.html", title="Licences", 
+            year=datetime.now().year, detail_form=detail_form, 
+            management_form=management_form)
 
 
 
@@ -139,7 +150,8 @@ def init_views(app):
 
     @app.route("/notes", methods=("GET", "POST"))
     def notes():
-        return render_template("notes.html", title="Notes", year=datetime.now().year)
+        return render_template("notes.html", title="Notes", 
+            year=datetime.now().year)
 
 
 
@@ -149,7 +161,8 @@ def init_views(app):
 
     @app.route("/share_notes", methods=("GET", "POST"))
     def share_notes():
-        return render_template("share-notes.html", title="Share Notes", year=datetime.now().year)
+        return render_template("share-notes.html", title="Share Notes", 
+            year=datetime.now().year)
 
 
     # route to view secure note
@@ -159,7 +172,8 @@ def init_views(app):
 
     @app.route("/secure_notes", methods=("GET", "POST"))
     def secure_notes():
-        return render_template("secure-notes.html", title="Secure Personal Notes", year=datetime.now().year)
+        return render_template("secure-notes.html", 
+            title="Secure Personal Notes", year=datetime.now().year)
 
 
 
@@ -169,7 +183,8 @@ def init_views(app):
     @app.route("/leave", methods=("GET", "POST"))
     def leave():
         
-        return render_template("leave.html", title="Anual/Medical Leave", year=datetime.now().year)
+        return render_template("leave.html", 
+            title="Anual/Medical Leave", year=datetime.now().year)
     
 
     # route to view anual leave
@@ -179,7 +194,8 @@ def init_views(app):
     def anual_leave():
 
         form = PersonalDay()
-        return render_template("anual-leave.html", title="Anual Leave", year=datetime.now().year, form=form)
+        return render_template("anual-leave.html", 
+            title="Anual Leave", year=datetime.now().year, form=form)
     
 
 
@@ -188,7 +204,8 @@ def init_views(app):
 
     @app.route("/Medical_leave", methods=("GET", "POST"))
     def medical_leave():
-        return render_template("medical-leave.html", title="Medical Leave", year=datetime.now().year)
+        return render_template("medical-leave.html", 
+            title="Medical Leave", year=datetime.now().year)
     
 
 
@@ -198,7 +215,8 @@ def init_views(app):
 
     @app.route("/compensation", methods=("GET", "POST"))
     def compensation():
-        return render_template("compensation.html", title="Compensations", year=datetime.now().year)
+        return render_template("compensation.html", 
+            title="Compensations", year=datetime.now().year)
     
 
 
@@ -207,7 +225,8 @@ def init_views(app):
 
     @app.route("/expence", methods=("GET", "POST"))
     def expence():
-        return render_template("expence.html", title="Expence Claim", year=datetime.now().year)
+        return render_template("expence.html", 
+            title="Expence Claim", year=datetime.now().year)
     
 
     # route to view overtime
@@ -215,4 +234,5 @@ def init_views(app):
 
     @app.route("/overtime", methods=("GET", "POST"))
     def overtime():
-        return render_template("overtime.html", title="Overtime", year=datetime.now().year)
+        return render_template("overtime.html", title="Overtime", 
+            year=datetime.now().year)
