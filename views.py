@@ -1,6 +1,6 @@
 from flask import (Flask, render_template, request, url_for, redirect, 
     session, flash)
-from models import User
+from models import User, Licence
 from config import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
@@ -13,7 +13,7 @@ from flask_login import (
 )
 from datetime import datetime
 from flask_bootstrap import Bootstrap5
-from forms import RegisterForm, LoginForm, PersonalDay, AddLicence
+from forms import RegisterForm, LoginForm, PersonalDay, LicenceForm
 
 
 def init_views(app):
@@ -135,11 +135,33 @@ def init_views(app):
 
     @app.route("/licences", methods=("GET", "POST"))
     def licences():
-        detail_form = AddLicence.ProductDetails()
-        management_form = AddLicence.ProductManagement()
-        return render_template("licences.html", title="Licences", 
-            year=datetime.now().year, detail_form=detail_form, 
-            management_form=management_form)
+        licence_list = list(Licence.query.all())
+
+        return render_template("licences.html", title="Licences",
+            year=datetime.now().year, licence_list=licence_list)
+    
+
+
+        # router to view licences
+
+
+
+    @app.route("/add_licence", methods=("GET", "POST"))
+    def add_licence():
+        form = LicenceForm()
+        if form.validate_on_submit():
+            new_licence = Licence(
+                date = datetime.now(),
+                product_name = form.product_name.data,
+                product_detail = form.product_detail.data,
+                expiration_date = form.expiration_date.data
+
+            )
+            db.session.add(new_licence)
+            db.session.commit()
+            return redirect(url_for('licences'))
+        return render_template("add-licence.html", title="Add New Licence",
+            year=datetime.now().year, form=form)
 
 
 
