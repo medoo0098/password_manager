@@ -19,8 +19,8 @@ class RegisterForm(FlaskForm):
     password = PasswordField("Password : ", 
         validators= [InputRequired(message:="password must be provided")], 
         render_kw={"class":"form-control"})
-    admin = BooleanField("Admin",default="")
-    manager = BooleanField("Manager", default="")
+    admin = BooleanField("Admin",default=False)
+    manager = BooleanField("Manager", default=False)
     department = SelectField("Department", 
         choices=["Sales", "Administration", "Technical", "General Manager"])
     submit = SubmitField("Register", render_kw={"class":"btn btn-warning"})
@@ -53,20 +53,16 @@ class PersonalDay(FlaskForm):
         render_kw={"class":"btn btn-warning"})
 
 
-class AddLicence(FlaskForm):
-
-    class ProductDetails(FlaskForm):
+class LicenceForm(FlaskForm):
         product_name = StringField("Product Name: ")
+        agreement = StringField("Agreement / Project name:")
+        product_detail = TextAreaField(" Product Brief")
         usage = SelectField(choices=["Internal Use", "Customer"])
-        mac = BooleanField("Mac", default="")
-        windows = BooleanField("Windows", default="")
-        android = BooleanField("Android", default="")
-        ios = BooleanField("iOS", default="")
-        unix = BooleanField("Unix Base OS", default="")
-
-
-    
-    class ProductManagement(FlaskForm):
+        mac = BooleanField("Mac", default=False)
+        windows = BooleanField("Windows", default=False)
+        android = BooleanField("Android", default=False)
+        ios = BooleanField("iOS", default=False)
+        unix = BooleanField("Unix Base OS", default=False)
         portal_url = URLField("Portal URL Address: ")
         avtication_key = StringField("Activation Key: ")
         username = StringField("Username / Email: ")
@@ -75,14 +71,10 @@ class AddLicence(FlaskForm):
         purchase_method = SelectField(choices=["Direct Debit", 
             "Credit Card", "Paypal", "Cash"])
         purchase_date = DateField("Purchase Date")
-        experation_date = DateField("Expiration Date")
-        purchase_duration = IntegerField("Duration")
-        month_year = SelectField(choices=["Month", "Year"])
+        expiration_date = DateField("Expiration Date")
+        auto_renew = BooleanField("Auto Renewable", default=False)
         cost = FloatField("Cost")
         currency = SelectField(choices=["GBP £", "USD $", "EUR €"])
+        
+        submit = SubmitField("Finish")
 
-    class ProductUsage(FlaskForm):
-        usecase = SelectField(choices=["Customer", "Internal"])
-        agreement = StringField("Agreement / Project:")
-        usage_starting = DateField("Starting to use from:")
-        usage_end = DateField("End usage on:")
