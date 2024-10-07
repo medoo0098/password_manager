@@ -21,3 +21,8 @@ footer{
 .btn-lg{
     border: 2px solid black;
 }
+
+.grid-container{
+
+    display: grid;
+}
