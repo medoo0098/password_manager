@@ -6,15 +6,29 @@
 
 <hr />
 
-<div class="container">
-{{ render_form(detail_form)}}
-
-<hr>
-
-{{ render_form(management_form)}}
+<div class="mt-5">
+    <a href="{{url_for('add_licence')}}">
+        <button class="btn btn-warning">Add New Licence</button>
+    </a>
 </div>
+<div class="row">
+    {% for item in licence_list %}
 
-{% endblock %}
-{% block year %} 
-    {{year}}
-{% endblock %}
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{item.product_name}}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">
+            Expires: {{item.expiration_date.strftime("%Y/%m/%d")}}</h6>
+          <p class="card-text">{{item.product_detail}}</p>
+          <a href="#" class="card-link">Details</a>
+          <a href="#" class="card-link">extend</a>
+        </div>
+      </div>
+
+    {% endfor %}
+</div>
+<div>
+    list of current licences
+</div>
+{% endblock %} 
+{% block year %} {{year}} {% endblock %}
