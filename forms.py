@@ -37,7 +37,7 @@ class LoginForm(FlaskForm):
 
     username = StringField("Username", 
         validators=[InputRequired(message="Username must be entered")])
-    password = StringField("Password", 
+    password = PasswordField("Password", 
         validators=[InputRequired(message="Password must be provided")])
     submit = SubmitField("Log in", render_kw={"class":"btn btn-warning"})
     
@@ -49,8 +49,25 @@ class PersonalDay(FlaskForm):
     start_time = TimeField("Starting Time")
     return_date = DateField("Return Time")
     return_time = TimeField("Return Time")
+    number_of_days = FloatField("Number of days :")
+    out_of_country = BooleanField("Out of country")
     submit = SubmitField("Submit for approval", 
         render_kw={"class":"btn btn-warning"})
+
+
+
+class MedicalDay(FlaskForm):
+     
+    appointment = StringField("Appointment to see:")
+    reason = StringField("Reason for appointment:")
+    location = StringField("Location of the appointment:")
+    appointment_date = DateField("Appointment Date:")
+    appointment_time = TimeField("Appointment Time:")
+    arrive = TimeField("Time to get to work:")
+    leave = TimeField("Time to leave work:")
+    submit = SubmitField("Submit for approval", 
+        render_kw={"class":"btn btn-warning"})
+    
 
 
 class LicenceForm(FlaskForm):
@@ -76,5 +93,5 @@ class LicenceForm(FlaskForm):
         cost = FloatField("Cost")
         currency = SelectField(choices=["GBP £", "USD $", "EUR €"])
         
-        submit = SubmitField("Finish")
+        submit = SubmitField("Finish", render_kw={"class":"btn btn-warning"})
 
