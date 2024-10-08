@@ -13,7 +13,8 @@ from flask_login import (
 )
 from datetime import datetime
 from flask_bootstrap import Bootstrap5
-from forms import RegisterForm, LoginForm, PersonalDay, LicenceForm
+from forms import (RegisterForm, LoginForm, 
+    PersonalDay, LicenceForm, MedicalDay)
 
 
 def init_views(app):
@@ -129,6 +130,19 @@ def init_views(app):
 
 
 
+
+    # route to view  add accounts
+
+
+
+    @app.route("/add_account", methods=("GET", "POST"))
+    def add_account():
+        return render_template("add-account.html", title="Adding new account", 
+            year=datetime.now().year)
+    
+
+
+
     # router to view licences
 
 
@@ -226,8 +240,10 @@ def init_views(app):
 
     @app.route("/Medical_leave", methods=("GET", "POST"))
     def medical_leave():
+        form = MedicalDay()
         return render_template("medical-leave.html", 
-            title="Medical Leave", year=datetime.now().year)
+            title="Medical Leave", year=datetime.now().year,
+            form=form)
     
 
 
