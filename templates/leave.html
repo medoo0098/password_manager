@@ -12,13 +12,40 @@
 <hr>
 
 
-<div class="container">
 
-    <a href="{{url_for('anual_leave')}}"><button class="btn btn-warning btn-lg">Anual Leave</button></a>
-    <a href="{{url_for('medical_leave')}}"><button class="btn btn-warning btn-lg">Medical Leave</button></a>
+<div class="container">
+    <div class="row p-5">
+        <div class="col-sm">
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" 
+                src="../static/images/holiday.jpg" alt="holicay">
+                <div class="card-body">
+                  <h5 class="card-title">Anual Leave</h5>
+                  <p class="card-text">Personal day to take off work.</p>
+                  <a href="{{url_for('anual_leave')}}" 
+                  class="btn btn-warning">Fill the form</a>
+                </div>
+              </div> 
+
+        </div>
+        <div class="col-sm">
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" 
+                src="../static/images/nurse.jpg" alt="nurse in blue">
+                <div class="card-body">
+                  <h5 class="card-title">Medical Leave</h5>
+                  <p class="card-text">Attending a medical 
+                    appointment or procedure.</p>
+                  <a href="{{url_for('medical_leave')}}" 
+                  class="btn btn-warning">Fill the form</a>
+                </div>
+              </div> 
+
+        </div>
+
+    </div>
 
 </div>
-
 
 {% endblock %}
 
