@@ -95,3 +95,9 @@ class LicenceForm(FlaskForm):
         
         submit = SubmitField("Finish", render_kw={"class":"btn btn-warning"})
 
+
+
+class NoteForm(FlaskForm):
+     title = StringField("Title:")
+     body = TextAreaField("note:")
+     submit = SubmitField("Save", render_kw={"class": "btn btn-warning"})
