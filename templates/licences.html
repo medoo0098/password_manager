@@ -5,16 +5,18 @@
 <h1 class="text-center">{{title}}</h1>
 
 <hr />
-
-<div class="mt-5">
+<div class="container">
+  
+<div class="mt-5 d-flex justify-content-center m-5">
     <a href="{{url_for('add_licence')}}">
         <button class="btn btn-warning">Add New Licence</button>
     </a>
 </div>
+
 <div class="row">
     {% for item in licence_list %}
 
-    <div class="card" style="width: 18rem;">
+    <div class="card m-3" style="width: 18rem;">
         <div class="card-body">
           <h5 class="card-title">{{item.product_name}}</h5>
           <h6 class="card-subtitle mb-2 text-muted">
@@ -27,8 +29,8 @@
 
     {% endfor %}
 </div>
-<div>
-    list of current licences
+
+
 </div>
 {% endblock %} 
 {% block year %} {{year}} {% endblock %}
