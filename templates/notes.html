@@ -4,41 +4,43 @@
 
 <h1 class="text-center">{{title}}</h1>
 
-
-
-
 <div class="container">
-    <div class="row p-5">
-        <div class="col-sm">
-            <div class="card" style="width: 18rem;">
-                <img class="card-img-top" 
-                src="../static/images/note.jpg" alt="notepad">
-                <div class="card-body">
-                  <h5 class="card-title">Share Notes</h5>
-                  <p class="card-text">Share an idea or a comment on a matter.</p>
-                  <a href="{{url_for('share_notes')}}" 
-                  class="btn btn-warning">Share your idea</a>
-                </div>
-              </div> 
-
+  <div class="row p-5">
+    <div class="col-sm">
+      <div class="card" style="width: 18rem">
+        <img
+          class="card-img-top"
+          src="../static/images/note.jpg"
+          alt="notepad"
+        />
+        <div class="card-body">
+          <h5 class="card-title">Share Notes</h5>
+          <p class="card-text">Share an idea or a comment on a matter.</p>
+          <a href="{{url_for('share_notes')}}" class="btn btn-warning"
+            >Share your idea</a
+          >
         </div>
-        <div class="col-sm">
-            <div class="card" style="width: 18rem;">
-                <img class="card-img-top" 
-                src="../static/images/secureNote.jpg" alt="nurse in blue">
-                <div class="card-body">
-                  <h5 class="card-title">Secure Personal Notes</h5>
-                  <p class="card-text">Save a personal note 
-                    for yourself hidden from all.</p>
-                  <a href="{{url_for('secure_notes')}}" 
-                  class="btn btn-warning">Create your note</a>
-                </div>
-              </div> 
-
-        </div>
-
+      </div>
     </div>
-
+    <div class="col-sm">
+      <div class="card" style="width: 18rem">
+        <img
+          class="card-img-top"
+          src="../static/images/secureNote.jpg"
+          alt="nurse in blue"
+        />
+        <div class="card-body">
+          <h5 class="card-title">Secure Personal Notes</h5>
+          <p class="card-text">
+            Save a personal note for yourself hidden from all.
+          </p>
+          <a href="{{url_for('secure_notes')}}" class="btn btn-warning"
+            >Create your note</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 {% endblock %} {% block year %} {{year}} {% endblock %}
