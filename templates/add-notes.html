@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %} 
+    <title>{{title}}</title>
+{% endblock %}
+
+
+{% block content %}
+
+<h1 class="text-center">{{title}}</h1>
+
+<hr class="mb-5">
+
+<div class="container">
+    <div class="row">
+      <div class="col-sm">{{ render_form(form)}}</div>
+  
+      <div class="col-sm
+      d-flex 
+          align-items-center 
+          justify-content-center">
+        <img src="../static/images/note.jpg" alt="holiday" 
+        style="height: 400px"; margin: 50px;>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block year %} {{year}} {% endblock %}
