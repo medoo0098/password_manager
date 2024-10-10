@@ -14,7 +14,7 @@ from flask_login import (
 from datetime import datetime
 from flask_bootstrap import Bootstrap5
 from forms import (RegisterForm, LoginForm, 
-    PersonalDay, LicenceForm, MedicalDay)
+    PersonalDay, LicenceForm, MedicalDay, NoteForm)
 
 
 def init_views(app):
@@ -199,6 +199,20 @@ def init_views(app):
     def share_notes():
         return render_template("share-notes.html", title="Share Notes", 
             year=datetime.now().year)
+    
+
+
+        # router to view share note
+
+
+
+    @app.route("/add_notes", methods=("GET", "POST"))
+    def add_notes():
+        form = NoteForm()
+        return render_template("add-notes.html", title="Add Notes", 
+            year=datetime.now().year, form=form)
+    
+
 
 
     # route to view secure note
