@@ -1,18 +1,52 @@
-{% extends "base.html" %}
-
-{% block title %} 
-    <title>{{title}}</title>
-{% endblock %}
-
-
-{% block content %}
+{% extends "base.html" %} {% block title %}
+<title>{{title}}</title>
+{% endblock %} {% block content %}
 
 <h1 class="text-center">{{title}}</h1>
 
-<hr>
+<hr />
 
+<div class="container">
+  <div class="row p-5">
+    <div class="col-sm">
+      <div class="card" style="width: 18rem">
+        <img
+          class="card-img-top"
+          src="../static/images/expence.png"
+          alt="notepad"
+        />
+        <div class="card-body">
+          <h5 class="card-title">Expence Claim</h5>
+          <p class="card-text">
+            Claim back the money you have spent or use of personal car on behalf
+            of Hire Intelligence.
+          </p>
+          <a href="{{url_for('expence')}}" class="btn btn-warning"
+            >Fill the form</a
+          >
+        </div>
+      </div>
+    </div>
+    <div class="col-sm">
+      <div class="card" style="width: 18rem">
+        <img
+          class="card-img-top"
+          src="../static/images/overtime.png"
+          alt="nurse in blue"
+        />
+        <div class="card-body">
+          <h5 class="card-title">Overtime Claim</h5>
+          <p class="card-text">
+            Claim extra time you have spent or over the working hours or over
+            weekend.
+          </p>
+          <a href="{{url_for('overtime')}}" class="btn btn-warning"
+            >Fill the form</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-
-{% endblock %}
-
-{% block year %} {{year}} {% endblock %}
+{% endblock %} {% block year %} {{year}} {% endblock %}
