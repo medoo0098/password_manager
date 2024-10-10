@@ -9,8 +9,16 @@
 
 <h1 class="text-center">{{title}}</h1>
 
-<hr>
+<hr class="mb-5">
 
+<div class="mt-5 d-flex justify-content-center m-5">
+    <a href="{{url_for('add_notes')}}">
+        <button class="btn btn-warning">Add New Note</button>
+    </a>
+</div>
 
+<div class="container">
+<p>notes</p>
+</div>
 
 {% endblock %}
