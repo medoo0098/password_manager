@@ -1,21 +1,118 @@
-{% extends "base.html" %}
-
-{% block title %} 
-    <title>{{title}}</title>
-{% endblock %}
-
-
-{% block content %}
+{% extends "base.html" %} {% block title %}
+<title>{{title}}</title>
+{% endblock %} {% block content %}
 
 <h1 class="text-center">{{title}}</h1>
 
+<div class="container">
+  <div class="row p-5">
+    <div class="col-sm">
+      <div class="card" style="width: 18rem">
+        <img
+          class="card-img-top"
+          src="../static/images/holiday.jpg"
+          alt="holicay"
+        />
+        <div class="card-body">
+          <h5 class="card-title">Anual Leave</h5>
+          <p class="card-text">Personal day to take off work.</p>
+          <a href="{{url_for('anual_leave')}}" class="btn btn-warning"
+            >Fill the form</a
+          >
+        </div>
+      </div>
+    </div>
+    <div class="col-sm">
+      <div class="card" style="width: 18rem">
+        <img
+          class="card-img-top"
+          src="../static/images/nurse.jpg"
+          alt="nurse in blue"
+        />
+        <div class="card-body">
+          <h5 class="card-title">Medical Leave</h5>
+          <p class="card-text">Attending a medical appointment or procedure.</p>
+          <a href="{{url_for('medical_leave')}}" class="btn btn-warning"
+            >Fill the form</a
+          >
+        </div>
+      </div>
+    </div>
 
-  
+    <div class="col-sm">
+      <div class="card" style="width: 18rem">
+        <img
+          class="card-img-top"
+          src="../static/images/expence.png"
+          alt="notepad"
+        />
+        <div class="card-body">
+          <h5 class="card-title">Expence Claim</h5>
+          <p class="card-text">
+            Claim back the money you have spent or use of personal car on behalf
+            of Hire Intelligence.
+          </p>
+          <a href="{{url_for('expence')}}" class="btn btn-warning"
+            >Fill the form</a
+          >
+        </div>
+      </div>
+    </div>
+    <div class="col-sm">
+      <div class="card" style="width: 18rem">
+        <img
+          class="card-img-top"
+          src="../static/images/overtime.png"
+          alt="nurse in blue"
+        />
+        <div class="card-body">
+          <h5 class="card-title">Overtime Claim</h5>
+          <p class="card-text">
+            Claim extra time you have spent or over the working hours or over
+            weekend.
+          </p>
+          <a href="{{url_for('overtime')}}" class="btn btn-warning"
+            >Fill the form</a
+          >
+        </div>
+      </div>
+    </div>
 
-  
-{% endblock %}
+    <div class="col-sm mt-2">
+      <div class="card" style="width: 18rem">
+        <img
+          class="card-img-top"
+          src="../static/images/note.jpg"
+          alt="notepad"
+        />
+        <div class="card-body">
+          <h5 class="card-title">Share Notes</h5>
+          <p class="card-text">Share an idea or a comment on a matter.</p>
+          <a href="{{url_for('share_notes')}}" class="btn btn-warning"
+            >Share your idea</a
+          >
+        </div>
+      </div>
+    </div>
+    <div class="col-sm mt-2 ">
+      <div class="card" style="width: 18rem">
+        <img
+          class="card-img-top"
+          src="../static/images/secureNote.jpg"
+          alt="nurse in blue"
+        />
+        <div class="card-body">
+          <h5 class="card-title">Secure Personal Notes</h5>
+          <p class="card-text">
+            Save a personal note for yourself hidden from all.
+          </p>
+          <a href="{{url_for('secure_notes')}}" class="btn btn-warning"
+            >Create your note</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-
-{% block year %} 
-    {{year}}
-{% endblock %}
+{% endblock %} {% block year %} {{year}} {% endblock %}
