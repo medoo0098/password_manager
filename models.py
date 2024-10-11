@@ -25,39 +25,27 @@ class Accounts(db.Model):
 
 
 
-class ShareNotes(db.Model):
-    id = db.Column(db.Integer, primary_key = True, autoincrement=True)
-    note = db.Column(db.String, nullable=False)
-    author = db.Column(db.String)
-
-
-
-class SecureNote(db.Model):
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    secure_note = db.Column(db.String)
-    secure_author = db.Column(db.String)
-
-
-
-class Leave(db.Model):
+class PersonalDay(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     start_date = db.Column(db.DateTime(timezone=True))
+    start_time = db.Column(db.DateTime(timezone=True))
     return_day = db.Column(db.DateTime(timezone=True))
-    hours = db.Column(db.Float)
+    return_time = db.Column(db.DateTime(timezone=True))
+    number_of_days = db.Column(db.Float)
+    out_of_country = db.Column(db.Boolean)
+
+
+
+class MedicalDay(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    appointment = db.Column(db.String)
     reason = db.Column(db.String)
+    location = db.Column(db.String)
+    appointment_date = db.Column(db.DateTime(timezone=True))
+    appointment_time = db.Column(db.DateTime(timezone=True))
+    arrive = db.Column(db.DateTime(timezone=True))
+    leave = db.Column(db.DateTime(timezone=True))
 
-
-
-class ExpenceClaim(db.Model):
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    date = db.Column(db.DateTime(timezone=True))
-    
-
-
-
-class Overtime(db.Model):
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    date = db.Column(db.DateTime(timezone=True))
 
 
 class Licence(db.Model):
@@ -83,4 +71,40 @@ class Licence(db.Model):
     auto_renew = db.Column(db.Boolean)
     cost = db.Column(db.Float)
     currency = db.Column(db.String)
+
+
+
+
+class ShareNotes(db.Model):
+    id = db.Column(db.Integer, primary_key = True, autoincrement=True)
+    
+    note = db.Column(db.String, nullable=False)
+    author = db.Column(db.String)
+
+
+
+class SecureNote(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    secure_note = db.Column(db.String)
+    secure_author = db.Column(db.String)
+
+
+
+
+
+
+
+class ExpenceClaim(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    date = db.Column(db.DateTime(timezone=True))
+    
+
+
+
+class Overtime(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    date = db.Column(db.DateTime(timezone=True))
+
+
+
 
