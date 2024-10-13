@@ -1,6 +1,7 @@
 from flask import (Flask, render_template, request, url_for, redirect, 
     session, flash)
-from models import User, Licence
+from models import (User, Licence, Accounts, PersonalDay, MedicalDay, 
+                    ShareNotes, SecureNote, ExpenceClaim, Overtime)
 from config import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
@@ -59,6 +60,11 @@ def init_views(app):
             username = form.username.data
             password = form.password.data
 
+            user = User.query.filter_by(username=username).first()
+            if user and check_password_hash(user.password, password):
+                login_user(user, remember=True)
+                return redirect(url_for("home"))
+
         return render_template("login.html", title="Login", 
             year=year, form=form)
 
@@ -103,9 +109,10 @@ def init_views(app):
 
     @app.route("/logout", methods=("GET", "POST"))
     def logout():
-        return render_template("logout.html", title="Logout", 
-            year=datetime.now().year)
-
+        user = current_user.username
+        logout_user()
+        flash(f"user {user.capitalize()} is logged out.", "warning")
+        return redirect(url_for("login"))
 
 
     # route to view about
@@ -156,7 +163,7 @@ def init_views(app):
     
 
 
-        # router to view licences
+        # router to view add licences
 
 
 
@@ -197,18 +204,31 @@ def init_views(app):
 
     @app.route("/share_notes", methods=("GET", "POST"))
     def share_notes():
+        notes_list = list(ShareNotes.query.all())
+        notes_list = sorted(notes_list, key=lambda x: x.date)
         return render_template("share-notes.html", title="Share Notes", 
-            year=datetime.now().year)
+            year=datetime.now().year, notes_list=notes_list)
     
 
 
-        # router to view share note
+        # router to view add share note
 
 
 
     @app.route("/add_notes", methods=("GET", "POST"))
     def add_notes():
         form = NoteForm()
+
+        if form.validate_on_submit():
+            add_note = ShareNotes(
+                title = form.title.data,
+                date = datetime.now(),
+                note = form.body.data,
+                author = current_user.username
+            )
+            db.session.add(add_note)
+            db.session.commit()
+            return redirect(url_for("share_notes"))
         return render_template("add-notes.html", title="Add Notes", 
             year=datetime.now().year, form=form)
     
@@ -224,6 +244,20 @@ def init_views(app):
     def secure_notes():
         return render_template("secure-notes.html", 
             title="Secure Personal Notes", year=datetime.now().year)
+    
+
+
+    
+        # router to view add secure note
+
+
+
+    @app.route("/add_secure_notes", methods=("GET", "POST"))
+    def add_secure_notes():
+        form = NoteForm()
+        return render_template("add-secure-notes.html", 
+                               title="Add Secure Notes", 
+            year=datetime.now().year, form=form)
 
 
 
