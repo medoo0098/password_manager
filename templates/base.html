@@ -91,15 +91,18 @@
             <span class="fw-bold d-flex align-items-center">
               {{current_user.username | capitalize}} &nbsp;
             </span>  
-            <button type="button" class="btn btn-outline-warning me-2">Logout</button>
+            <button type="button" class="btn btn-outline-warning me-2" 
+            onclick="window.location.href='{{ url_for("logout") }}'">
+            Logout</button>
+
 
             {% else %}
 
             <a href="{{url_for('login')}}"><button type="button" class="btn btn-outline-warning me-2">Login</button></a>
-            <a href="{{url_for('register')}}"><button type="button" class="btn btn-warning">Register</button></a>
+            
 
             {% endif %}
-            
+            <a href="{{url_for('register')}}"><button type="button" class="btn btn-warning">Register</button></a>
           </div>
         </div>
       </div>
