@@ -101,3 +101,13 @@ class NoteForm(FlaskForm):
      title = StringField("Title:")
      body = TextAreaField("note:")
      submit = SubmitField("Save", render_kw={"class": "btn btn-warning"})
+
+
+
+class ExpenceForm(FlaskForm):
+    pass
+
+
+
+class OvertimeForm(FlaskForm):
+    pass
