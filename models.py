@@ -27,9 +27,10 @@ class Accounts(db.Model):
 
 class PersonalDay(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    date = db.Column(db.DateTime(timezone=True))
     start_date = db.Column(db.DateTime(timezone=True))
     start_time = db.Column(db.DateTime(timezone=True))
-    return_day = db.Column(db.DateTime(timezone=True))
+    return_date = db.Column(db.DateTime(timezone=True))
     return_time = db.Column(db.DateTime(timezone=True))
     number_of_days = db.Column(db.Float)
     out_of_country = db.Column(db.Boolean)
@@ -38,6 +39,7 @@ class PersonalDay(db.Model):
 
 class MedicalDay(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    date = db.Column(db.DateTime(timezone=True))
     appointment = db.Column(db.String)
     reason = db.Column(db.String)
     location = db.Column(db.String)
@@ -77,7 +79,8 @@ class Licence(db.Model):
 
 class ShareNotes(db.Model):
     id = db.Column(db.Integer, primary_key = True, autoincrement=True)
-    
+    date = db.Column(db.DateTime(timezone=True))
+    title = db.Column(db.String, nullable=False)
     note = db.Column(db.String, nullable=False)
     author = db.Column(db.String)
 
@@ -85,12 +88,9 @@ class ShareNotes(db.Model):
 
 class SecureNote(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    date = db.Column(db.DateTime(timezone=True))
     secure_note = db.Column(db.String)
     secure_author = db.Column(db.String)
-
-
-
-
 
 
 
