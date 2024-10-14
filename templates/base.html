@@ -102,7 +102,9 @@
             
 
             {% endif %}
+            {% if current_user.is_admin %}
             <a href="{{url_for('register')}}"><button type="button" class="btn btn-warning">Register</button></a>
+            {% endif %}
           </div>
         </div>
       </div>
