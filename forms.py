@@ -81,13 +81,40 @@ class LicenceForm(FlaskForm):
         ios = BooleanField("iOS", default=False)
         unix = BooleanField("Unix Base OS", default=False)
         portal_url = URLField("Portal URL Address: ")
-        avtication_key = StringField("Activation Key: ")
+        activation_key = StringField("Activation Key: ")
         username = StringField("Username / Email: ")
         password = StringField("Password: ")
         purchased_by = StringField("Purchased By (name) :")
         purchase_method = SelectField(choices=["Direct Debit", 
             "Credit Card", "Paypal", "Cash"])
         purchase_date = DateField("Purchase Date")
+        expiration_date = DateField("Expiration Date")
+        auto_renew = BooleanField("Auto Renewable", default=False)
+        cost = FloatField("Cost")
+        currency = SelectField(choices=["GBP £", "USD $", "EUR €"])
+        
+        submit = SubmitField("Finish", render_kw={"class":"btn btn-warning"})
+
+
+    
+class LicenceEditForm(FlaskForm):
+        product_name = StringField("Product Name: ")
+        agreement = StringField("Agreement / Project name:")
+        product_detail = TextAreaField(" Product Brief")
+        usage = SelectField(choices=["Internal Use", "Customer"])
+        mac = BooleanField("Mac", default=False)
+        windows = BooleanField("Windows", default=False)
+        android = BooleanField("Android", default=False)
+        ios = BooleanField("iOS", default=False)
+        unix = BooleanField("Unix Base OS", default=False)
+        portal_url = URLField("Portal URL Address: ")
+        activation_key = StringField("Activation Key: ")
+        username = StringField("Username / Email: ")
+        password = StringField("Password: ")
+        purchased_by = StringField("Purchased By (name) :")
+        purchase_method = SelectField(choices=["Direct Debit", 
+            "Credit Card", "Paypal", "Cash"])
+        purchased_date = DateField("Purchase Date")
         expiration_date = DateField("Expiration Date")
         auto_renew = BooleanField("Auto Renewable", default=False)
         cost = FloatField("Cost")
