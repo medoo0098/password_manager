@@ -14,7 +14,7 @@ from flask_login import (
 )
 from datetime import datetime
 from flask_bootstrap import Bootstrap5
-from forms import (RegisterForm, LoginForm, 
+from forms import (RegisterForm, LoginForm, LicenceEditForm,
     PersonalDay, LicenceForm, MedicalDay, NoteForm)
 
 
@@ -174,15 +174,92 @@ def init_views(app):
             new_licence = Licence(
                 date = datetime.now(),
                 product_name = form.product_name.data,
+                agreement = form.agreement.data,
                 product_detail = form.product_detail.data,
-                expiration_date = form.expiration_date.data
-
+                usage = form.usage.data,
+                mac = form.mac.data,
+                windows = form.windows.data,
+                android = form.android.data,
+                ios =  form.ios.data,
+                unix = form.unix.data,
+                portal_url = form.portal_url.data,
+                activation_key = form.activation_key.data,
+                username = form.username.data,
+                password = form.password.data,
+                purchased_by = form.purchased_by.data,
+                purchase_method = form.purchase_method.data, 
+                purchased_date = form.purchase_date.data,
+                expiration_date = form.expiration_date.data,
+                auto_renew = form.auto_renew.data,
+                cost = form.cost.data,
+                currency = form.currency.data
             )
             db.session.add(new_licence)
             db.session.commit()
             return redirect(url_for('licences'))
         return render_template("add-licence.html", title="Add New Licence",
             year=datetime.now().year, form=form)
+
+
+
+        # router to view detailed licences
+
+
+
+    @app.route("/licence_detail/<int:licence_id>", methods=("GET", "POST"))
+    def licence_detail(licence_id):
+        licence = db.get_or_404(Licence, licence_id )
+        form = LicenceEditForm(
+                product_name = licence.product_name,
+                agreement = licence.agreement,
+                product_detail = licence.product_detail,
+                usage = licence.usage,
+                mac = licence.mac,
+                windows = licence.windows,
+                android = licence.android,
+                ios =  licence.ios,
+                unix = licence.unix,
+                portal_url = licence.portal_url,
+                activation_key = licence.activation_key,
+                username = licence.username,
+                password = licence.password,
+                purchased_by = licence.purchased_by,
+                purchase_method = licence.purchase_method, 
+                purchased_date = licence.purchased_date,
+                expiration_date = licence.expiration_date,
+                auto_renew = licence.auto_renew,
+                cost = licence.cost,
+                currency = licence.currency
+            )
+        if form.validate_on_submit():
+            
+            licence.date = datetime.now()
+            licence.product_name = form.product_name.data
+            licence.agreement = form.agreement.data
+            licence.product_detail = form.product_detail.data
+            licence.usage = form.usage.data
+            licence.mac = form.mac.data
+            licence.windows = form.windows.data
+            licence.android = form.android.data
+            licence.ios =  form.ios.data
+            licence.unix = form.unix.data
+            licence.portal_url = form.portal_url.data
+            licence.activation_key = form.activation_key.data
+            licence.username = form.username.data
+            licence.password = form.password.data
+            licence.purchased_by = form.purchased_by.data
+            licence.purchase_method = form.purchase_method.data
+            licence.purchased_date = form.purchased_date.data
+            licence.expiration_date = form.expiration_date.data
+            licence.auto_renew = form.auto_renew.data
+            licence.cost = form.cost.data
+            licence.currency = form.currency.data
+            
+            db.session.commit()
+            return redirect(url_for('licences'))
+
+        return render_template("licence-details.html", title="Licence Details",
+            year=datetime.now().year, form = form)
 
 
 
