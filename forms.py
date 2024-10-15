@@ -33,6 +33,21 @@ class RegisterForm(FlaskForm):
         
 
 
+class AccountsForm(FlaskForm):
+
+    name = StringField("Name:")
+    website = StringField("Website:")
+    username = StringField("Username:")
+    password = StringField("Password:")
+    creator = StringField("Created By:")
+    note = TextAreaField("Notes and updates:")
+    cost = FloatField("Cost (if aplicable):")
+    expiry = DateField("Expiry date(if aplicable):")
+    submit = SubmitField("Save", render_kw={"class":"btn btn-warning"})
+
+
+
+
 class LoginForm(FlaskForm):
 
     username = StringField("Username", 
@@ -73,7 +88,7 @@ class MedicalDay(FlaskForm):
 class LicenceForm(FlaskForm):
         product_name = StringField("Product Name: ")
         agreement = StringField("Agreement / Project name:")
-        product_detail = TextAreaField(" Product Brief")
+        product_detail = TextAreaField(" Product Brief and notes:")
         usage = SelectField(choices=["Internal Use", "Customer"])
         mac = BooleanField("Mac", default=False)
         windows = BooleanField("Windows", default=False)
@@ -90,7 +105,7 @@ class LicenceForm(FlaskForm):
         purchase_date = DateField("Purchase Date")
         expiration_date = DateField("Expiration Date")
         auto_renew = BooleanField("Auto Renewable", default=False)
-        cost = FloatField("Cost")
+        cost = FloatField("Cost:")
         currency = SelectField(choices=["GBP £", "USD $", "EUR €"])
         
         submit = SubmitField("Finish", render_kw={"class":"btn btn-warning"})
