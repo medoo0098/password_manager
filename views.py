@@ -1,5 +1,5 @@
 from flask import (Flask, render_template, request, url_for, redirect, 
-    session, flash)
+    session, flash, g)
 from models import (User, Licence, Accounts, PersonalDay, MedicalDay, 
                     ShareNotes, SecureNote, ExpenceClaim, Overtime)
 from config import db
@@ -15,8 +15,16 @@ from flask_login import (
 from datetime import datetime
 from flask_bootstrap import Bootstrap5
 from forms import (RegisterForm, LoginForm, LicenceEditForm,
-    PersonalDay, LicenceForm, MedicalDay, NoteForm)
+    PersonalDay, LicenceForm, MedicalDay, NoteForm, AccountsForm)
 
+year=datetime.now().year
+
+
+
+
+
+
+#  start of the views
 
 def init_views(app):
 
@@ -24,7 +32,12 @@ def init_views(app):
     login_manager.init_app(app)
     login_manager.login_view = "login"
 
-    
+    @app.before_request
+    def set_global_variable():
+        user_len = list(User.query.all())
+        no_user = len(user_len)
+        g.user_length = no_user
+
 
     @login_manager.user_loader
     def load_user(user_id):
@@ -44,7 +57,7 @@ def init_views(app):
         form = PersonalDay()
 
         return render_template("index.html", 
-            title="Hire Intelligence Staff Portal", 
+                               title="Hire Intelligence Staff Portal", 
             year=datetime.now().year, form=form)
 
 
@@ -132,8 +145,9 @@ def init_views(app):
 
     @app.route("/accounts", methods=("GET", "POST"))
     def accounts():
+        accounts_list = list(Accounts.query.all())
         return render_template("accounts.html", title="Logins", 
-            year=datetime.now().year)
+            year=datetime.now().year, accounts_list=accounts_list)
 
 
 
@@ -144,8 +158,63 @@ def init_views(app):
 
     @app.route("/add_account", methods=("GET", "POST"))
     def add_account():
-        return render_template("add-account.html", title="Adding new account", 
-            year=datetime.now().year)
+        form = AccountsForm()
+        if form.validate_on_submit():
+            new_login = Accounts(
+                date = datetime.now(),
+                name = form.name.data,
+                website = form.website.data,
+                username = form.username.data,
+                password = form.password.data,
+                creator = form.creator.data,
+                note = form.note.data,
+                cost = form.cost.data,
+                expiry = form.expiry.data
+            )
+            db.session.add(new_login)
+            db.session.commit()
+            return redirect(url_for("accounts"))
+
+        return render_template("add-account.html", title="Add new account", 
+            year=datetime.now().year, form=form)
+    
+
+
+     # router to view account detasils
+
+
+
+    @app.route("/account_detail/<int:account_id>", methods=("GET", "POST"))
+    def account_detail(account_id):
+        account = db.get_or_404(Accounts, account_id )
+        form = AccountsForm(
+                name = account.name,
+                website = account.website,
+                username = account.username,
+                password = account.password,
+                creator = account.creator,
+                note = account.note,
+                cost = account.cost,
+                expiry = account.expiry,
+                date = account.date
+            )
+        if form.validate_on_submit():
+            
+            account.date = datetime.now()
+            account.name = form.name.data
+            account.website = form.website.data
+            account.username = form.username.data
+            account.password = form.password.data
+            account.creator = form.creator.data
+            account.note = form.note.data
+            account.cost = form.cost.data
+            account.expiry = form.expiry.data
+            
+            db.session.commit()
+            return redirect(url_for('accounts'))
+
+        return render_template("account-details.html", title="Account Details",
+            year=datetime.now().year, form = form)
     
 
 
