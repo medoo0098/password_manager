@@ -14,13 +14,14 @@ class User(db.Model, UserMixin):
 
 class Accounts(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    date = db.Column(db.DateTime(timezone=True))
+    name = db.Column(db.String, nullable = True)
     website = db.Column(db.String, nullable=True)
-    username = db.Column(db.String, nullable=False)
-    password = db.Column(db.String, nullable=False)
+    username = db.Column(db.String, nullable=True)
+    password = db.Column(db.String, nullable=True)
     creator = db.Column(db.String)
     note = db.Column(db.String(500))
-    time = db.Column(db.DateTime(timezone=True))
-    cost = db.column(db.Float)
+    cost = db.Column(db.Float)
     expiry = db.Column(db.DateTime(timezone=True))
 
 
