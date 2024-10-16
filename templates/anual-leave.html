@@ -6,19 +6,38 @@
 
 <hr class="mb-5" />
 
-<div class="container">
-  <div class="row">
-    <div class="col-sm">{{ render_form(form)}}</div>
-
-    <div class="col-sm
-    d-flex 
-        align-items-center 
-        justify-content-center">
-      <img src="../static/images/holiday.jpg" alt="holiday" 
-      style="height: 400px"; margin: 50px;>
-    </div>
+<div class="mt-5 d-flex justify-content-center m-5">
+  <a href="{{url_for('add_anual_leave')}}">
+    <button class="btn btn-warning">Fill new leave form</button>
+  </a>
   </div>
-</div>
 
-{% endblock %} 
-{% block year %} {{year}} {% endblock %}
+  <div class="container">
+    <div>
+      <div class="row">
+        {% for item in list %}
+    
+        <div class="card m-3" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">{{item.start_date.strftime("%Y/%m/%d")}}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">
+                from: {{item.start_date.strftime("%Y/%m/%d")}} 
+                 </h6>
+                 <h6 class="card-subtitle mb-2 text-muted">
+                  to: {{item.return_date.strftime("%Y/%m/%d")}}
+                 </h6>
+              <p class="card-text"></p>
+              <a href="{{url_for('licence_detail', licence_id = item.id)}}" 
+              class="card-link">Details</a>
+            </div>
+          </div>
+    
+        {% endfor %}
+    </div>
+    </div>
+
+  </div>
+
+
+
+{% endblock %} {% block year %} {{year}} {% endblock %}

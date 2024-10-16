@@ -12,10 +12,10 @@ from flask_login import (
     logout_user,
     login_required,
 )
-from datetime import datetime
+from datetime import datetime, date, time
 from flask_bootstrap import Bootstrap5
-from forms import (RegisterForm, LoginForm, LicenceEditForm,
-    PersonalDay, LicenceForm, MedicalDay, NoteForm, AccountsForm)
+from forms import (RegisterForm, LoginForm, LicenceEditForm, PersonalDayForm, 
+                   LicenceForm, MedicalDayForm, NoteForm, AccountsForm)
 
 year=datetime.now().year
 
@@ -54,11 +54,10 @@ def init_views(app):
 
     @app.route("/", methods=("GET", "POST"))
     def home():
-        form = PersonalDay()
 
         return render_template("index.html", 
                                title="Hire Intelligence Staff Portal", 
-            year=datetime.now().year, form=form)
+            year=datetime.now().year)
 
 
 
@@ -422,10 +421,39 @@ def init_views(app):
 
     @app.route("/anual_leave", methods=("GET", "POST"))
     def anual_leave():
+        anual_leave_list = list(PersonalDay.query.all())
 
-        form = PersonalDay()
         return render_template("anual-leave.html", 
-            title="Anual Leave", year=datetime.now().year, form=form)
+            title="Anual Leave", year=datetime.now().year, list=anual_leave_list)
+
+
+
+    # route to view add anual leave
+
+
+    @app.route("/add_anual_leave", methods=("GET", "POST"))
+    def add_anual_leave():
+        form = PersonalDayForm()
+        if form.validate_on_submit():
+            new_leave_form = PersonalDay(
+                date = datetime.now(),
+                start_date=datetime.combine(form.start_date.data, time.min) if form.start_date.data else None,
+                start_time=datetime.combine(date.min, form.start_time.data) if form.start_time.data else None,
+                return_date=datetime.combine(form.return_date.data, time.min) if form.return_date.data else None,
+                return_time=datetime.combine(date.min, form.return_time.data) if form.return_time.data else None,
+                number_of_days = form.number_of_days.data,
+                out_of_country = form.out_of_country.data
+            )
+            db.session.add(new_leave_form)
+            db.session.commit()
+
+            return redirect(url_for("anual_leave"))
+
+        return render_template("add-anual-leave.html", 
+            title="Add Anual Leave", year=datetime.now().year, form=form)
+
+
+
     
 
 

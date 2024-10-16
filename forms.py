@@ -58,7 +58,7 @@ class LoginForm(FlaskForm):
     
 
 
-class PersonalDay(FlaskForm):
+class PersonalDayForm(FlaskForm):
 
     start_date = DateField("Starting Time")
     start_time = TimeField("Starting Time")
@@ -71,7 +71,7 @@ class PersonalDay(FlaskForm):
 
 
 
-class MedicalDay(FlaskForm):
+class MedicalDayForm(FlaskForm):
      
     appointment = StringField("Appointment to see:")
     reason = StringField("Reason for appointment:")
