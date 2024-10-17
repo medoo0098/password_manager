@@ -462,7 +462,7 @@ def init_views(app):
 
     @app.route("/Medical_leave", methods=("GET", "POST"))
     def medical_leave():
-        form = MedicalDay()
+        form = MedicalDayForm()
         return render_template("medical-leave.html", 
             title="Medical Leave", year=datetime.now().year,
             form=form)
