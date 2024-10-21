@@ -437,9 +437,11 @@ def init_views(app):
         if form.validate_on_submit():
             new_leave_form = PersonalDay(
                 date = datetime.now(),
-                start_date=datetime.combine(form.start_date.data, time.min) if form.start_date.data else None,
+                start_date = form.start_date.data,
+                # start_date=datetime.combine(form.start_date.data, time.min) if form.start_date.data else None,
                 start_time=datetime.combine(date.min, form.start_time.data) if form.start_time.data else None,
-                return_date=datetime.combine(form.return_date.data, time.min) if form.return_date.data else None,
+                return_date = form.return_date,
+                # return_date=datetime.combine(form.return_date.data, time.min) if form.return_date.data else None,
                 return_time=datetime.combine(date.min, form.return_time.data) if form.return_time.data else None,
                 number_of_days = form.number_of_days.data,
                 out_of_country = form.out_of_country.data
@@ -454,7 +456,38 @@ def init_views(app):
 
 
 
-    
+
+    # route to view anual leave details
+
+
+    @app.route("/anual_leave_details/<int:leave_id>", methods=("GET", "POST"))
+    def anual_leave_details(leave_id):
+        
+        anual_leave = db.get_or_404(PersonalDay, leave_id )
+        form = PersonalDayForm(
+            start_date = anual_leave.start_date,
+            start_time = anual_leave.start_time,
+            return_date = anual_leave.return_date,
+            return_time = anual_leave.return_time,
+            number_of_days = anual_leave.number_of_days,
+            out_of_country = anual_leave.out_of_country,
+
+        )
+        if form.validate_on_submit():
+            anual_leave.start_date = form.start_date.data
+            anual_leave.start_time = datetime.combine(date.min, form.start_time.data) if form.start_time.data else None
+            anual_leave.return_date = form.return_date.data
+            anual_leave.start_time = datetime.combine(date.min, form.return_time.data) if form.return_time.data else None
+            anual_leave.number_of_days = form.number_of_days.data
+            anual_leave.out_of_country = form.out_of_country.data
+
+            db.session.commit()
+            return redirect(url_for("anual_leave"))
+
+
+        return render_template("anual_leave_details.html", 
+            title="Anual Leave Details", year=datetime.now().year, form=form)
+
 
 
     # route to view medial leave
